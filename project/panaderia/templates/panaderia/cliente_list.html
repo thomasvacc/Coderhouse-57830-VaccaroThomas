@@ -1,0 +1,17 @@
+{% extends 'panaderia/base.html' %}
+
+{% block header %}
+Lista de usuarios
+{% endblock header %}
+
+{% block main %}
+    <button>
+        <a href= "{% url 'cliente_create' %}">Crear Cliente</a>
+    </button>
+
+    {% for object in object_list %}
+        <p> {{object.apellido | upper }}, {{object.nombre}} ({{object.celular}})</p>
+        {% empty %}
+            <P> No hay registros </P>
+        {% endfor %}
+{% endblock main %}

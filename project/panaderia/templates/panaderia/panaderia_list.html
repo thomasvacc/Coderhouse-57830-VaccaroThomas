@@ -1,0 +1,17 @@
+{% extends 'panaderia/base.html' %}
+
+{% block header %}
+Panaderia
+{% endblock header %}
+
+{% block main %}
+    <button>
+    <a href="{% url 'panaderia_create' %}">Crear Producto</a>
+    </button>
+
+    {% for object in object_list %}
+        <p> {{object.nombre | upper}} ${{ object.precio }}</p>
+        {% empty %}
+            <P> No hay registros </P>
+        {% endfor %}
+{% endblock main %}
