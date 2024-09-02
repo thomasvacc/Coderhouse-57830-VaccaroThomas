@@ -11,6 +11,7 @@ Panaderia
 
     {% for object in object_list %}
         <p> {{object.nombre | upper}} ${{ object.precio }}</p>
+        <p>{{object.descripcion}}</p>
         {% empty %}
             <P> No hay registros </P>
         {% endfor %}
