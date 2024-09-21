@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+Lista de pedidos
+{% endblock header %}
+
+{% block main %}
+    <button>
+    <a href="{% url 'pedido:pedido_create' %}">Crear Pedido</a>
+    </button>
+
+    {% for object in object_list %}
+        <p>
+            Servicio: {{ object.servicio }}
+            Estado: {{ object.estado }}
+            <a href="{% url 'pedido:pedido_detail' object.id %}">Detalle</a>
+        </p>
+        {% empty %}
+            <P> No hay registros </P>
+        {% endfor %}
+{% endblock main %}

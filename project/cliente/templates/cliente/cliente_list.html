@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+<h1>Lista de Clientes</h1>
+{% endblock header %}
+
+{% block main %}
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <h2>Clientes</h2>
+    <a href="{% url 'cliente:cliente_create' %}" class="button">Crear Cliente</a>
+</div>
+
+<table>
+    <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>{{ object.apellido | upper }}</td>
+                <td>{{ object.nombre }}</td>
+                <td>
+                    <a href="{% url 'cliente:cliente_detail' object.id %}">Detalles</a>
+                </td>
+                <td>
+                    <a href="#" class="edit-link">Cambiar</a>
+                </td>
+                <td>
+                    <a href="#" class="delete-link">Borrar</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No hay registros</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}
+

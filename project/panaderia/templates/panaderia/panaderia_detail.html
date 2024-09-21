@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+Detalle de producto
+{% endblock header %}
+
+{% block main %}
+    <ul>
+        <li>Nombre: {{object.nombre}} </li>
+        <li>Descripcion: {{object.descripcion}} </li>
+    </ul>
+    <button>
+    <a href="{% url 'panaderia:panaderia_list' %}">Volver</a>
+    </button>
+
+{% endblock main %}

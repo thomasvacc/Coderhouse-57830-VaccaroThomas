@@ -1,4 +1,4 @@
-{% extends 'panaderia/base.html' %}
+{% extends 'core/base.html' %}
 
 {% block header %}
 Panaderia
@@ -6,12 +6,12 @@ Panaderia
 
 {% block main %}
     <button>
-    <a href="{% url 'panaderia_create' %}">Crear Producto</a>
+    <a href="{% url 'panaderia:panaderia_create' %}">Crear Producto</a>
     </button>
 
     {% for object in object_list %}
         <p> {{object.nombre | upper}} ${{ object.precio }}</p>
-        <p>{{object.descripcion}}</p>
+        <a href="{% url 'panaderia:panaderia_detail' object.id %}">Detalle</a>
         {% empty %}
             <P> No hay registros </P>
         {% endfor %}

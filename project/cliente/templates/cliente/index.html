@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Fan de pan
+{% endblock header %}
+
+{% block main %}
+    <div style="display: flex; flex-direction: column ;align-items: center;">
+    <a href="{% url 'cliente:cliente_list' %}">
+        <button>Lista de clientes</button>
+    </div>
+{% endblock main %}

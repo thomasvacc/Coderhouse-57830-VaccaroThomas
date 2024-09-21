@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+Detalle de clientes
+{% endblock header %}
+
+{% block main %}
+    <button>
+        <a href= "{% url 'cliente:cliente_list' %}">Volver</a>
+    </button>
+        <p> {{object.apellido | upper }}, {{object.nombre}} ({{object.celular}})</p>
+        <P>Domicilio: {{object.domicilio}}</P>
+{% endblock main %}
