@@ -6,12 +6,14 @@ Panaderia
 
 {% block main %}
     <button>
-    <a href="{% url 'panaderia:panaderia_create' %}">Crear Producto</a>
+    <a href="{% url 'panaderia:panaderia_form' %}">Crear Producto</a>
     </button>
 
     {% for object in object_list %}
         <p> {{object.nombre | upper}} ${{ object.precio }}</p>
         <a href="{% url 'panaderia:panaderia_detail' object.id %}">Detalle</a>
+        <a href="{% url 'panaderia:panaderia_update' object.id %}">Cambiar</a>
+        <a href="{% url 'panaderia:panaderia_delete' object.id %}">Borrar</a>
         {% empty %}
             <P> No hay registros </P>
         {% endfor %}

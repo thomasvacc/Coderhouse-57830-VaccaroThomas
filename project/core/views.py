@@ -24,6 +24,5 @@ class Profile(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('core:index')
 
     def get_object(self):
-        # Devuelve el usuario actual, si no, Django va a esperar un pk en la URL
         return self.request.user
 

@@ -1,36 +1,44 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
 
 from .forms import ClienteForm
 from .models import Cliente
 
-@login_required
 def index(request):
     return render(request, 'cliente/index.html')
 
-def cliente_list(request):
-    q = request.GET.get('q')
-    if q:
-        query = Cliente.objects.filter(nombre__icontains=q)
-    else:
-        query = Cliente.objects.all()
-    context = {'object_list': query}
-    return render(request, 'cliente/cliente_list.html', context)
 
+class ClienteList(LoginRequiredMixin, ListView):
+    model = Cliente
+    template_name = 'cliente/cliente_list.html'
+    context_object_name = 'clientes'
+    queryset = Cliente.objects.all()
 
-def cliente_create(request):
-    if request.method == 'GET':
-        form = ClienteForm()
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            queryset = Cliente.objects.filter(nombre__icontains=q)
+        return queryset
 
-    if request.method == 'POST':
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('cliente:cliente_list')
+class ClienteCreate(LoginRequiredMixin, CreateView):
+    model = Cliente
+    form_class = ClienteForm
+    success_url = reverse_lazy('productos:cliente_list')
 
-    return render(request, 'cliente/cliente_create.html', {'form': form})
+class ClienteDetail(LoginRequiredMixin, DetailView):
+    model = Cliente
+    context_object_name = 'object'
+    template_name = 'cliente/cliente_detail.html'
 
-def cliente_detail(request, id):
-    query = Cliente.objects.get(pk=id)
-    context = {'object': query}
-    return render(request, 'cliente/cliente_detail.html', context)
+class ClienteUpdate(LoginRequiredMixin, UpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    success_url = reverse_lazy('cliente:cliente_list')
+
+class ClienteDelete(LoginRequiredMixin, DeleteView):
+    model = Cliente
+    success_url = reverse_lazy('cliente:cliente_list')

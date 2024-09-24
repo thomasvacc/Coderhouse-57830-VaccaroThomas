@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Panaderia: Borrar producto de panaderia
+{% endblock header %}
+
+{% block main %}
+    <p>¿Está seguro que desea borrar el producto "{{ object.nombre }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmo</button>
+    </form>
+    <a href="{% url 'panaderia:panaderia_list' %}">Volver</a>
+{% endblock main %}

@@ -6,7 +6,9 @@ app_name = 'pedido'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path("detail/<int:pk>", views.pedido_detail, name= "pedido_detail"),
-    path("create/", views.pedido_create, name= "pedido_create"),
-    path("list/", views.pedido_list, name= "pedido_list"),
+    path("detail/<int:pk>", views.PedidoDetail.as_view(), name= "pedido_detail"),
+    path("form/", views.PedidoCreate.as_view(), name= "pedido_form"),
+    path("list/", views.PedidoList.as_view(), name= "pedido_list"),
+    path('pedido/update/<int:pk>', views.PedidoUpdate.as_view(), name='pedido_update'),
+    path('pedido/delete/<int:pk>', views.PedidoDelete.as_view(), name='pedido_delete'),
 ]

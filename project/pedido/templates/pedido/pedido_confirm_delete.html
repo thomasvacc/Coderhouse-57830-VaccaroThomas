@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+    Pedidos: Borrar Pedido
+{% endblock header %}
+
+{% block main %}
+    <p>¿Está seguro que desea borrar el pedido de "{{ object.cliente }} ({{object.servicio}})"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmo</button>
+    </form>
+    <a href="{% url 'pedido:pedido_list' %}">Volver</a>
+{% endblock main %}

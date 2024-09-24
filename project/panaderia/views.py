@@ -1,28 +1,41 @@
-from django.shortcuts import render, redirect
-from .models import Panaderia
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+
 from .forms import PanaderiaForm
+from .models import Panaderia
 
 def index(request):
-    return render(request, "panaderia/index.html")
-
-def panaderia_list(request):
-    query = Panaderia.objects.all()
-    context = {"object_list": query}
-    return render(request, "panaderia/panaderia_list.html", context)
+    return render(request, 'panaderia/index.html')
 
 
-def panaderia_create(request):
-    if request.method == "GET":
-        form = PanaderiaForm()
-    if request.method == "POST":
-        form = PanaderiaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("panaderia_list")
-    return render(request, "panaderia/panaderia_create.html", {"form": form})
+class PanaderiaList(LoginRequiredMixin, ListView):
+    model = Panaderia
+    template_name = 'panaderia/panaderia_list.html'
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            queryset = Panaderia.objects.filter(nombre__icontains=q)
+        return queryset
 
+class PanaderiaCreate(LoginRequiredMixin, CreateView):
+    model = Panaderia
+    form_class = PanaderiaForm
+    success_url = reverse_lazy('panaderia:panaderia_list')
 
-def panaderia_detail(request, pk: int):
-    query = Panaderia.objects.get(id=pk)
-    context = {'object': query}
-    return render(request, 'panaderia/panaderia_detail.html', context)
+class PanaderiaDetail(LoginRequiredMixin, DetailView):
+    model = Panaderia
+    context_object_name = 'object'
+    template_name = 'panaderia/panaderia_detail.html'
+
+class PanaderiaUpdate(LoginRequiredMixin, UpdateView):
+    model = Panaderia
+    form_class = PanaderiaForm
+    success_url = reverse_lazy('panaderia:panaderia_list')
+
+class PanaderiaDelete(LoginRequiredMixin, DeleteView):
+    model = Panaderia
+    success_url = reverse_lazy('panaderia:panaderia_list')

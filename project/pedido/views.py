@@ -1,26 +1,41 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+
 from .forms import PedidoForm
 from .models import Pedido
 
-def pedido_list(request):
-    query = Pedido.objects.all()
-    context = {"object_list": query}
-    return render(request, "pedido/pedido_list.html", context)
-
-def pedido_create(request):
-    if request.method == "GET":
-        form = PedidoForm()
-    elif request.method == "POST":
-        form = PedidoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('pedido:pedido_list') 
-    return render(request, "pedido/pedido_create.html", {"form": form})
-
-def pedido_detail(request, pk: int):
-    query = Pedido.objects.get(id=pk)
-    context = {'object': query}
-    return render(request, 'pedido/pedido_detail.html', context)
-
 def index(request):
-    return render(request, "pedido/index.html")
+    return render(request, 'pedido/index.html')
+
+
+class PedidoList(LoginRequiredMixin, ListView):
+    model = Pedido
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if q:
+            queryset = Pedido.objects.filter(nombre__icontains=q)
+        return queryset
+
+class PedidoCreate(LoginRequiredMixin, CreateView):
+    model = Pedido
+    form_class = PedidoForm
+    success_url = reverse_lazy('pedido:pedido_list')
+
+class PedidoDetail(LoginRequiredMixin, DetailView):
+    model = Pedido
+    context_object_name = 'object'
+    template_name = 'pedido/pedido_detail.html'
+
+class PedidoUpdate(LoginRequiredMixin, UpdateView):
+    model = Pedido
+    form_class = PedidoForm
+    success_url = reverse_lazy('pedido:pedido_list')
+
+class PedidoDelete(LoginRequiredMixin, DeleteView):
+    model = Pedido
+    success_url = reverse_lazy('pedido:pedido_list')

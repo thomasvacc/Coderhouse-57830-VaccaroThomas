@@ -1,6 +1,6 @@
-from django.db import models
 from panaderia.models import Panaderia
 from cliente.models import Cliente
+from django.db import models
 
 class Pedido(models.Model):
     class Estado(models.TextChoices):
@@ -16,3 +16,4 @@ class Pedido(models.Model):
 
     def __str__(self) -> str:
         return f"Pedido de {self.servicio.nombre} para {self.cliente.nombre}"
+

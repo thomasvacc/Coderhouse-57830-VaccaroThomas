@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 USE_I18N = True
 
@@ -146,3 +147,16 @@ TEMPLATES = [
         },
     },
 ]
+
+# Configuración de autenticación
+# URL de la página de inicio de sesión
+LOGIN_URL = reverse_lazy('core:login')
+# URL a la que se redirige después de un inicio de sesión exitoso
+LOGIN_REDIRECT_URL = reverse_lazy('core:index')
+
+# MEDIA_ROOT sirve para indicar la ruta donde se almacenarán los archivos multimedia
+MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL indica la URL pública desde donde se podrán acceder a los archivos multimedia
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = BASE_DIR / 'static'

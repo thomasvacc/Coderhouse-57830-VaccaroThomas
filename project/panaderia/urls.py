@@ -6,7 +6,9 @@ app_name = 'panaderia'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path("panaderia/detail/<int:pk>", views.panaderia_detail, name= "panaderia_detail"),
-    path("panaderia/create/", views.panaderia_create, name= "panaderia_create"),
-    path("panaderia/list/", views.panaderia_list, name= "panaderia_list"),
+    path("panaderia/detail/<int:pk>", views.PanaderiaDetail.as_view(), name= "panaderia_detail"),
+    path("panaderia/form/", views.PanaderiaCreate.as_view(), name= "panaderia_form"),
+    path("panaderia/list/", views.PanaderiaList.as_view(), name= "panaderia_list"),
+    path('panaderia/update/<int:pk>', views.PanaderiaUpdate.as_view(), name='panaderia_update'),
+    path('panaderia/delete/<int:pk>', views.PanaderiaDelete.as_view(), name='panaderia_delete'),
 ]

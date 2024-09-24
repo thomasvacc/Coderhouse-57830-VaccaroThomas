@@ -6,7 +6,7 @@ Lista de pedidos
 
 {% block main %}
     <button>
-    <a href="{% url 'pedido:pedido_create' %}">Crear Pedido</a>
+    <a href="{% url 'pedido:pedido_form' %}">Crear Pedido</a>
     </button>
 
     {% for object in object_list %}
@@ -14,6 +14,8 @@ Lista de pedidos
             Servicio: {{ object.servicio }}
             Estado: {{ object.estado }}
             <a href="{% url 'pedido:pedido_detail' object.id %}">Detalle</a>
+            <a href="{% url 'pedido:pedido_update' object.id %}">Cambiar</a>
+            <a href="{% url 'pedido:pedido_delete' object.id %}">Borrar</a>
         </p>
         {% empty %}
             <P> No hay registros </P>
