@@ -1,13 +1,29 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-Detalle de clientes
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container" style="background-color: transparent;">
+        <a class="navbar-brand text-uppercase fw-bold" href="{% url 'core:index' %}">Fan De Pan</a>
+    </div>
+</nav>
+<header>
+    <h1 class="site-heading text-center text-primary mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: bold;">Detalle de Clientes</h1>
+</header>
 {% endblock header %}
 
 {% block main %}
-    <button>
-        <a href= "{% url 'cliente:cliente_list' %}">Volver</a>
-    </button>
-        <p> {{object.apellido | upper }}, {{object.nombre}} ({{object.celular}})</p>
-        <P>Domicilio: {{object.domicilio}}</P>
+<section class="page-section clearfix">
+    <div class="container" style="background-color: transparent;">
+        <div class="bg-faded p-5 rounded" style="background-color: rgba(249, 230, 178, 0.9); text-align: center;">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: normal;">
+                Cliente: <strong>{{ object.nombre }} {{ object.apellido | upper }}</strong><br>
+                Celular: <strong>{{ object.celular }}</strong><br>
+                Domicilio: <strong>{{ object.domicilio }}</strong>
+            </p>
+            <div class="mt-4">
+                <a href="{% url 'cliente:cliente_list' %}" class="btn btn-primary btn-xl">Volver</a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock main %}

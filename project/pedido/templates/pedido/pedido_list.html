@@ -1,23 +1,42 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-Lista de pedidos
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container" style="background-color: transparent;">
+        <a class="navbar-brand text-uppercase fw-bold" href="{% url 'core:index' %}">Fan De Pan</a>
+    </div>
+</nav>
+<header>
+    <h1 class="site-heading text-center text-faded d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3">Lista de Pedidos</span>
+    </h1>
+</header>
 {% endblock header %}
 
 {% block main %}
-    <button>
-    <a href="{% url 'pedido:pedido_form' %}">Crear Pedido</a>
-    </button>
+<section class="page-section clearfix">
+    <div class="container" style="background-color: transparent;">
+        <div class="text-center mb-4">
+            <a href="{% url 'pedido:pedido_create' %}" class="btn btn-primary btn-xl" style="font-size: 1.2rem;">Crear Pedido</a>
+        </div>
 
-    {% for object in object_list %}
-        <p>
-            Servicio: {{ object.servicio }}
-            Estado: {{ object.estado }}
-            <a href="{% url 'pedido:pedido_detail' object.id %}">Detalle</a>
-            <a href="{% url 'pedido:pedido_update' object.id %}">Cambiar</a>
-            <a href="{% url 'pedido:pedido_delete' object.id %}">Borrar</a>
-        </p>
-        {% empty %}
-            <P> No hay registros </P>
-        {% endfor %}
+        {% if object_list %}
+            <div class="list-group">
+                {% for object in object_list %}
+                    <div class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F9E6B2; color: black; border: none; border-radius: 15px; margin-bottom: 10px;">
+                        <span style="flex-grow: 1; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: normal;">Producto: {{ object.servicio|upper }}</span>
+                        <span style="flex-basis: 100px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: normal; text-align: center;">Estado: {{ object.estado }}</span>
+                        <div>
+                            <a href="{% url 'pedido:pedido_detail' object.id %}" class="btn btn-primary">Detalle</a>
+                            <a href="{% url 'pedido:pedido_update' object.id %}" class="btn btn-primary">Cambiar</a>
+                            <a href="{% url 'pedido:pedido_delete' object.id %}" class="btn btn-primary">Borrar</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center" style="font-family: Arial, sans-serif;">No hay registros</p>
+        {% endif %}
+    </div>
+</section>
 {% endblock main %}

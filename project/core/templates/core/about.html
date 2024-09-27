@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container" style="background-color: transparent;">
+        <a class="navbar-brand text-uppercase fw-bold" href="{% url 'core:index' %}">Fan De Pan</a>
+    </div>
+</nav>
+<header>
+    <h1 class="site-heading text-center text-primary mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: bold;">Thomas Vaccaro</h1>
+</header>
+{% endblock header %}
+
+{% block main %}
+<section class="page-section clearfix">
+    <div class="container" style="background-color: transparent;">
+        <div class="bg-faded p-5 rounded" style="background-color: rgba(249, 230, 178, 0.9);">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem;">
+                Hola buenas soy Thomas Vaccaro y esta es mi primer experiencia en el mundo de la programacion.
+                Para mi proyecto final decidi hacer una pagina para la panaderia de mis abuelos en la cual yo tambien trabajo de vez en cuando, por lo que aparte de un proyecto a presentar, terminara siendo funcional para mi y mi familia.
+                La idea es que la pagina tenga dos puntos de vista, el cliente, con la presentacion del negocio y los productos que ofrecemos, y la del vendedor, con una vision mucho mayor donde podremos registrar productos, clientes, y con estos armar un registro de los pedidos.
+                Muchas gracias por lo enseñado, me llevo mucho conocimiento y ganas de seguir aprendiendo.
+                Para ver la vista del vendedor (usuario:admin, contraseña:123), para ver la del cliente (usuario:comprador, contraseña:coderhouse123)
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock main %}

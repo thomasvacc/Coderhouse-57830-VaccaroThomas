@@ -1,1 +1,44 @@
 {% extends 'core/base.html' %}
+
+{% load static %}
+{% block header %}
+<header>
+    <h1 class="site-heading text-center text-faded d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3">Fan De Pan</span>
+        <span class="site-heading-lower">Panaderia Familiar</span>
+    </h1>
+</header>
+{% endblock header %}
+
+{% block main %}       
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'core/img/panaderia.jpg' %}" alt="..." />
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper">CAFE CALIENTE</span>
+                    <span class="section-heading-lower">MEDIALUNAS FACTURAS</span>
+                </h2>
+                <p class="mb-3">Y MUCHAS COSAS MAS PODRAS ENCONTRAR EN NUESTRO LOCAL UBICADO EN FRENTE DE LA ESTACION JOSE C. PAZ, LA DIRECCION ES JOSE C. PAZ 1716 </p>
+                <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">VISITANOS!</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner bg-faded text-center rounded">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-upper">COMPROMETIDOS</span>
+                        <span class="section-heading-lower">CON EL CLIENTE</span>
+                    </h2>
+                    <p class="mb-0">PANADERIA DE BARRIO CON BUENA GENTE, CLIMA AMIGABLE, DONDE SIEMPRE VAS A ENCONTRAR ALGUIEN CON QUIEN PASAR UN RATO Y COMIDA RICA PARA DISFRUTAR. NUESTRA MOTIVACION SOS VOS Y NUESTRA OBLIGACION ES QUE LLEGUES A CASA CON UNA SONRISA :)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}

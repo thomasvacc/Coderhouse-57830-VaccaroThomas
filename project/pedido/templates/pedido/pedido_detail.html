@@ -1,18 +1,30 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-Detalle de pedidos
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container" style="background-color: transparent;">
+        <a class="navbar-brand text-uppercase fw-bold" href="{% url 'core:index' %}">Fan De Pan</a>
+    </div>
+</nav>
+<header>
+    <h1 class="site-heading text-center text-primary mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: bold;">Detalle de Pedidos</h1>
+</header>
 {% endblock header %}
 
 {% block main %}
-    <button>
-    <a href="{% url 'pedido:pedido_list' %}">Volver</a>
-    </button>
-
-        <p>
-            Servicio: {{ object.servicio }} - 
-            Cliente: {{ object.cliente | upper}}
-            Fecha: {{ object.fecha_entrega | date:"d/m/Y"}}
-            Estado: {{ object.estado }}
-        </p>      
+<section class="page-section clearfix">
+    <div class="container" style="background-color: transparent;">
+        <div class="bg-faded p-5 rounded" style="background-color: rgba(249, 230, 178, 0.9); text-align: center;">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: normal;">
+                Servicio: <strong>{{ object.servicio }}</strong> - 
+                Cliente: <strong>{{ object.cliente | upper }}</strong> - 
+                Fecha: <strong>{{ object.fecha_entrega | date:"d/m/Y" }}</strong> - 
+                Estado: <strong>{{ object.estado }}</strong>
+            </p>
+            <div class="mt-4">
+                <a href="{% url 'pedido:pedido_list' %}" class="btn btn-primary btn-xl">Volver</a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock main %}

@@ -1,13 +1,52 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-    Actualizar Perfil del Usuario
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container" style="background-color: transparent;">
+        <a class="navbar-brand text-uppercase fw-bold" href="{% url 'core:index' %}">Fan De Pan</a>
+    </div>
+</nav>
+<header>
+    <h1 class="site-heading text-center text-primary mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: bold;">Actualizar Perfil del Usuario</h1>
+</header>
 {% endblock header %}
 
 {% block main %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar cambios</button>
-    </form>
+<section class="page-section clearfix">
+    <div class="container" style="background-color: transparent;">
+        <div class="bg-faded p-5 rounded" style="background-color: rgba(249, 230, 178, 0.9);">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <h3>Cambiar Nombre de Usuario</h3>
+                <div class="mb-3">
+                    {{ user_form.username.label_tag }} 
+                    {{ user_form.username }}
+                    <div class="invalid-feedback">Por favor, introduce un nombre de usuario válido.</div>
+                </div>
+                
+                <h3>Cambiar Contraseña</h3>
+                <div class="mb-3">
+                    {{ password_form.old_password.label_tag }} 
+                    {{ password_form.old_password }}
+                    <div class="invalid-feedback">Por favor, introduce tu contraseña actual.</div>
+                </div>
+                <div class="mb-3">
+                    {{ password_form.new_password1.label_tag }} 
+                    {{ password_form.new_password1 }}
+                    <div class="invalid-feedback">Por favor, introduce una nueva contraseña válida.</div>
+                </div>
+                <div class="mb-3">
+                    {{ password_form.new_password2.label_tag }} 
+                    {{ password_form.new_password2 }}
+                    <div class="invalid-feedback">Por favor, repite tu nueva contraseña.</div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-xl">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 {% endblock main %}

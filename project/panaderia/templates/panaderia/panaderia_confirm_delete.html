@@ -1,14 +1,29 @@
 {% extends 'core/base.html' %}
 
 {% block header %}
-    Panaderia: Borrar producto de panaderia
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container" style="background-color: transparent;">
+        <a class="navbar-brand text-uppercase fw-bold" href="{% url 'core:index' %}">Fan De Pan</a>
+    </div>
+</nav>
+<header>
+    <h1 class="site-heading text-center text-primary mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: bold;">Panadería: Borrar producto de panadería</h1>
+</header>
 {% endblock header %}
 
 {% block main %}
-    <p>¿Está seguro que desea borrar el producto "{{ object.nombre }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirmo</button>
-    </form>
-    <a href="{% url 'panaderia:panaderia_list' %}">Volver</a>
+<section class="page-section clearfix">
+    <div class="container" style="background-color: transparent;">
+        <div class="bg-faded p-5 rounded" style="background-color: rgba(249, 230, 178, 0.9); text-align: center;">
+            <p style="font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: normal;">¿Está seguro que desea borrar el producto "<strong>{{ object.nombre }}</strong>"?</p>
+            <form method="post" class="text-center">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-xl">Confirmo</button>
+            </form>
+            <div class="text-center mt-4">
+                <a href="{% url 'panaderia:panaderia_list' %}" class="btn btn-primary btn-xl">Volver</a>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock main %}
